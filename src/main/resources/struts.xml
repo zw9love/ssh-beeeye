@@ -18,7 +18,9 @@
 
     <package name="host" namespace="/host" extends="struts-default">
         <action name="get" class="com.lpdata.action.BeeeyeHostAction" method="get"/>
-        <action name="get/" class="com.lpdata.action.BeeeyeHostAction" method="get"/>
+        <action name="post" class="com.lpdata.action.BeeeyeHostAction" method="post"/>
+        <action name="put" class="com.lpdata.action.BeeeyeHostAction" method="put"/>
+        <action name="delete" class="com.lpdata.action.BeeeyeHostAction" method="delete"/>
         <!--<action name="*" class="com.lpdata.action.BeeeyeHostAction" method="{1}"/>-->
     </package>
 
