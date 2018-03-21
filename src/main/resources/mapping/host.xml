@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.lpdata.bean">
+    <class table="beeeye_host" name="Host">
+        <id name="host_ids" column="host_ids">
+            <generator class="assigned"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="ip" column="ip"/>
+        <property name="port" column="port"/>
+        <property name="status" column="status"/>
+        <property name="os_type" column="os_type" update="false"/>
+        <property name="os_version" column="os_version" update="false"/>
+        <property name="os_arch" column="os_arch" update="false"/>
+        <property name="login_name" column="login_name" update="false"/>
+        <property name="login_pwd" column="login_pwd" update="false"/>
+    </class>
+</hibernate-mapping>

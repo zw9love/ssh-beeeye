@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+    <constant name="struts.locale" value="zh_CN" />
+
+    <package name="login" namespace="/" extends="struts-default">
+        <action name="" class="com.lpdata.action.LoginAction" method="root">
+            <result name="success">/login.html</result>
+        </action>
+        <action name="login" class="com.lpdata.action.LoginAction">
+            <result name="success">/login.html</result>
+        </action>
+    </package>
+
+    <package name="host" namespace="/host" extends="struts-default">
+        <action name="get" class="com.lpdata.action.BeeeyeHostAction" method="get"/>
+        <action name="get/" class="com.lpdata.action.BeeeyeHostAction" method="get"/>
+        <!--<action name="*" class="com.lpdata.action.BeeeyeHostAction" method="{1}"/>-->
+    </package>
+
+</struts>
