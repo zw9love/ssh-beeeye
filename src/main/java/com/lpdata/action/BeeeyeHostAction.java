@@ -157,14 +157,10 @@ public class BeeeyeHostAction extends ActionSupport {
     }
 
     public void testSpring() throws IOException {
-        System.out.println("进来了");
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
-        System.out.print("111");
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        System.out.print(context);
         Host host = context.getBean("host", Host.class);
-        System.out.println("进来了222");
         host.setName("麦迪");
         response.getWriter().write(MyUtil.getJson("成功", 200, host.getName()).toString());
     }

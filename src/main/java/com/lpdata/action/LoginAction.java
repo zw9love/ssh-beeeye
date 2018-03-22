@@ -38,12 +38,12 @@ public class LoginAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        System.out.println("进来了LoginAction的execute默认方法");
+        logger.debug("进来了LoginAction的execute默认方法");
         return SUCCESS;
     }
 
     public void doLogin() throws Exception {
-        System.out.println("进来了doLogin方法");
+        logger.debug("进来了doLogin方法");
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
         request.setCharacterEncoding("utf-8");
@@ -54,9 +54,9 @@ public class LoginAction extends ActionSupport {
         if (checkObj.getInteger("status").equals(200)) {
             String loginName = json.get("login_name").toString();
             String loginPwd = MD5Util.encrypt(json.get("login_pwd").toString());
-            logger.info("login_name = " + loginName);
-            logger.info("login_pwd = " + loginPwd);
-            logger.info("科比科比科比");
+            logger.debug("login_name = " + loginName);
+            logger.debug("login_pwd = " + loginPwd);
+            logger.debug("科比科比科比");
             String sql = " SELECT * FROM common_user where login_name = :login_name and login_pwd = :login_pwd ";
             Session session = sf.openSession();
             Transaction tx = session.beginTransaction();
