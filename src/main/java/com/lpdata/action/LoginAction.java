@@ -56,6 +56,7 @@ public class LoginAction extends ActionSupport {
             String loginPwd = MD5Util.encrypt(json.get("login_pwd").toString());
             logger.info("login_name = " + loginName);
             logger.info("login_pwd = " + loginPwd);
+            logger.info("科比科比科比");
             String sql = " SELECT * FROM common_user where login_name = :login_name and login_pwd = :login_pwd ";
             Session session = sf.openSession();
             Transaction tx = session.beginTransaction();
