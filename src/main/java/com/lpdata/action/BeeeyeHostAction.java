@@ -11,6 +11,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +29,6 @@ import java.util.Map;
 public class BeeeyeHostAction extends ActionSupport {
     private String tableName = "beeeye_host";
     private static SessionFactory sf;
-
     static {
         //创建SessionFactory对象
         sf = new Configuration().configure().buildSessionFactory();
@@ -152,5 +154,18 @@ public class BeeeyeHostAction extends ActionSupport {
         session.close();
         JSONObject data = MyUtil.getJson("成功", 200, null);
         response.getWriter().write(data.toString());
+    }
+
+    public void testSpring() throws IOException {
+        System.out.println("进来了");
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        System.out.print("111");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        System.out.print(context);
+        Host host = context.getBean("host", Host.class);
+        System.out.println("进来了222");
+        host.setName("麦迪");
+        response.getWriter().write(MyUtil.getJson("成功", 200, host.getName()).toString());
     }
 }

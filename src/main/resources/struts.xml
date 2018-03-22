@@ -3,17 +3,42 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-    <constant name="struts.devMode" value="true" />
-    <constant name="struts.i18n.encoding" value="UTF-8" />
-    <constant name="struts.locale" value="zh_CN" />
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.locale" value="zh_CN"/>
+    <constant name="struts.action.extension" value=","/>
+    <package name="all" extends="struts-default">
+        <interceptors>
+            <!-- 1.注册拦截器 -->
+            <interceptor name="requestInterceptor" class="com.lpdata.interceptor.RequestInterceptor"/>
+            <!--<interceptor name="tokenInterceptor" class="lpdata.interceptor.TokenInterceptor"></interceptor>-->
+            <!-- 2.注册拦截器栈 -->
+            <interceptor-stack name="myInterceptorStack">
+                <!-- 自定义拦截器引入(建议放在20个拦截器之前) -->
+                <interceptor-ref name="requestInterceptor">
+                    <!-- 指定哪些方法不拦截-->
+                    <!--<param name="excludeMethods">add,delete</param> -->
+                    <!-- 指定哪些方法需要拦截 -->
+                    <!--<param name="includeMethods">add,delete</param>-->
+                </interceptor-ref>
+                <!--<interceptor-ref name="tokenInterceptor" />-->
+                <!-- 引用默认的拦截器栈(20个) -->
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <!-- 3.指定包中的默认拦截器栈 -->
+        <default-interceptor-ref name="myInterceptorStack"/>
+    </package>
+
+    <package name="index" namespace="" extends="struts-default">
+        <action name="*" class="com.lpdata.action.IndexAction" method="index" />
+    </package>
 
     <package name="login" namespace="/" extends="struts-default">
-        <action name="" class="com.lpdata.action.LoginAction" method="root">
-            <result name="success">/login.html</result>
-        </action>
         <action name="login" class="com.lpdata.action.LoginAction">
             <result name="success">/login.html</result>
         </action>
+        <action name="dologin" class="com.lpdata.action.LoginAction" method="doLogin"/>
     </package>
 
     <package name="host" namespace="/host" extends="struts-default">
@@ -21,6 +46,7 @@
         <action name="post" class="com.lpdata.action.BeeeyeHostAction" method="post"/>
         <action name="put" class="com.lpdata.action.BeeeyeHostAction" method="put"/>
         <action name="delete" class="com.lpdata.action.BeeeyeHostAction" method="delete"/>
+        <action name="testspring" class="com.lpdata.action.BeeeyeHostAction" method="testSpring"/>
         <!--<action name="*" class="com.lpdata.action.BeeeyeHostAction" method="{1}"/>-->
     </package>
 
